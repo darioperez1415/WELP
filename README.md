@@ -5,3 +5,4 @@
 
 # Project Plan 
 - [Wireframes](https://www.figma.com/file/qVgOgFThFrFCvCSJ3N6VYP/WELP?node-id=0%3A1)
+- [FlowChart](https://www.figma.com/file/Pc7l4fDPoqOwQQepSQxxnB/WELP-Flow-Chart)
