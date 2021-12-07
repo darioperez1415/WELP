@@ -70,10 +70,10 @@ export default function ContactForm({ contactObj = {} }) {
               value={formInput.number || ''}
               onChange={handleChange}
             />
+            <button className="btn btn-info" type="submit">
+              {contactObj.firebaseKey ? 'Update' : 'Submit'}
+            </button>
           </div>
-          <button className="btn btn-info" type="submit">
-            {contactObj.firebaseKey ? 'Update' : 'Submit'}
-          </button>
         </div>
       </form>
     </div>
