@@ -1,0 +1,80 @@
+.navbar {
+    background-color: #1f5156;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    text-decoration: none;
+   }
+   .navbar .leftSide{
+    flex:50%;
+    display:flex;
+    justify-content: left;
+    align-items: center;
+   }
+   .navbar .leftSide .leftSidelinks{
+    max-height: 80px;
+   } 
+   .navbar .leftSide .leftSidelinks a {
+    text-decoration: none;
+    max-height: 50px;
+    color: #f5b921;
+    font-size: 25px;
+    margin-left:15px;
+    cursor: pointer;
+   }  
+   .navbar .rightSide button{
+    margin-left: 20px;
+} 
+.navbar .rightSide{
+    flex:50%;
+    text-decoration: none;
+    display:flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    }
+    .navbar .rightSide .rightSideLinks a {
+        text-decoration: none;
+        max-height: 50px;
+        color: #f5b921;
+        font-size: 17px;
+        margin-left:15px;
+        cursor: pointer;
+       }
+       .rightSide button{
+        height: 32px;
+       }
+       @media only screen and (max-width: 880px) {
+        .navbar .leftSide .leftSidelinks a {
+         font-size: 16px;
+        }
+       }
+        @media only screen and (max-width: 880px){
+             .navbar .rightSide .rightSideLinks a {
+           font-size: 14px;
+       }
+        }
+       @media only screen and (max-width: 750px) {
+           .navbar .leftSide .leftSidelinks a {
+            font-size: 12px;
+        }
+        .navbar .rightSide .rightSideLinks a {
+           font-size: 10px;
+       }
+       }
+       @media only screen and (max-width: 650px) {
+           .navbar .leftSide button {
+            display: flex;
+        }
+       }
+       
+       @media only screen and (max-width: 500px) {
+           .navbar .rightSide button{
+           display: flex;
+       }
+       }

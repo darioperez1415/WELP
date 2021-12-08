@@ -1,0 +1,11 @@
+{
+    "post" : {
+      "title" : "laptop",
+      "description" : "Under bed",
+      "firebaseKey" : "",
+      "photoUrl" : "",
+      "value": 1000,
+      "serialNumber": 123,
+      "userId" : ""
+    }
+}
