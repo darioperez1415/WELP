@@ -26,7 +26,7 @@ function Initialize() {
       {user ? (
         <>
           <Navigation />
-          <Routes />
+          <Routes user={user} />
         </>
       ) : (
         <SignIn user={user} />

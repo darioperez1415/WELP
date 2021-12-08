@@ -2,13 +2,14 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import PostCard from '../components/PostCard';
-import ContactForm from '../components/ContactForm';
+import EContactView from '../views/ContactView';
+import EContacts from '../components/EContacts';
 import PostForm from '../components/PostForm';
 import EditContactArray from '../views/EditContactArray';
 import EditSingleContact from '../views/EditSingleContact';
-import ContactView from '../views/ContactView';
 
 export default function Routes({ user }) {
+  console.warn(user);
   return (
     <div>
       <Switch>
@@ -18,21 +19,21 @@ export default function Routes({ user }) {
         <Route
           exact
           path="/addContacts"
-          component={() => <ContactForm user={user} />}
+          component={() => <EContactView user={user} />}
         />
         <Route
           exact
           path="/emergencyContacts"
-          component={ContactView}
+          component={EContacts}
         />
         <Route
           exact
-          path="/editContactArray"
+          path="/emergencyContacts"
           component={EditContactArray}
         />
         <Route
           exact
-          path="/editSingleContact/:fbk"
+          path="/emergencyContacts/:fbk"
           component={EditSingleContact}
         />
       </Switch>
