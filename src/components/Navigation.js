@@ -1,25 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { signOutUser } from '../api/auth';
 import '../styles/globals/navBar.scss';
-
-export default function Navigation() {
+function Navigation() {
+  const [click, setClick] = useState(false);
+  const handleClick = () => setClick(!click);
   return (
-    <div className="navbar">
-      <div className="leftSide">
-        <div className="leftSidelinks">
-          <a href="/">WELP</a>
-        </div>
-      </div>
-      <div className="rightSide">
-        <div className="rightSideLinks">
-          <a href="/addPost">ADD PHOTO ID</a>
-          <a href="/addContacts">ADD CONTACT</a>
-          <a href="/emergencyContacts">EMERGENCY CONTACTS </a>
-        </div>
-        <button onClick={signOutUser} type="button" className="btn btn-primary">
+    <nav className="navbar">
+      <div className="nav-container">
+        <NavLink to="/" className="nav-logo" onClick={handleClick}>
+          WELP
+        </NavLink>
+        <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+          <li className="nav-item active">
+            <NavLink
+              exact
+              className="nav-links"
+              onClick={handleClick}
+              to="/addPost"
+            >
+              ADD PHOTO ID
+            </NavLink>
+          </li>
+          <li className="nav-item active">
+            <NavLink
+              exact
+              to="/eContactView"
+              className="nav-links"
+              onClick={handleClick}
+            >
+              ADD CONTACT
+            </NavLink>
+          </li>
+          <li className="nav-item active">
+            <NavLink
+              exact
+              to="/econtacts"
+              className="nav-links"
+              onClick={handleClick}
+            >
+              EMERGENCY CONTACTS
+            </NavLink>
+          </li>
+        </ul>
+        <button onClick={signOutUser} type="button" className="btn btn-warning">
           SignOut
         </button>
       </div>
-    </div>
+    </nav>
   );
 }
+export default Navigation;
