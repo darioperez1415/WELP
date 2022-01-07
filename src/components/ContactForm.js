@@ -1,61 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import userObj from '../helpers.js/userObj';
-import {
-  createContact,
-  updateContact,
-} from '../api/data/contactData';
-
+import PropTypes from 'prop-types';
+import { createContact, updateContact } from '../api/data/contactData';
 const initialState = {
   name: '',
   number: 0,
   uid: '',
+  favortie: false,
 };
-export default function ContactForm({ contactObj = {} }) {
-  const history = useHistory();
-  const userInfo = userObj();
+export default function ContactForm({ obj, userId }) {
   const [formInput, setFormInput] = useState(initialState);
+  const history = useHistory();
   useEffect(() => {
-    if (contactObj.firebaseKey) {
+    if (obj.firebaseKey) {
       setFormInput({
-        name: contactObj.name,
-        firebaseKey: contactObj.firebaseKey,
-        number: contactObj.number,
-        uid: contactObj.uid,
+        name: obj.name,
+        firebaseKey: obj.firebaseKey,
+        number: obj.number,
+        uid: obj.uid,
+        favorite: obj.favorite,
       });
     }
-  }, [contactObj]);
-
+  }, [obj]);
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormInput((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
-
   const resetForm = () => {
-    setFormInput({ ...initialState });
+    setFormInput(initialState);
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (contactObj.firebaseKey) {
+    if (obj.firebaseKey) {
+      // update the item
       updateContact(formInput).then(() => {
-        history.push('/emergencyContacts');
+        resetForm();
+        history.push('/econtacts');
       });
     } else {
-      createContact({ ...formInput, uid: userInfo }).then(() => {
+      createContact({ ...formInput, uid: userId }).then(() => {
         resetForm();
-        history.push('/emergencyContacts');
+        history.push('/econtacts');
       });
     }
   };
   return (
     <div className="container">
-      <h1 className="form-label">userInfo {userInfo}</h1>
+      <h1 className="text-center">Add Emergency Contatcts</h1>
       <form onSubmit={handleSubmit}>
         <div className="row pt-5 mx-auto">
           <div className="col-8 form-group mx-auto">
@@ -64,23 +58,23 @@ export default function ContactForm({ contactObj = {} }) {
               name="name"
               className="form-control"
               id="name"
-              placeholder="Contact Name"
-              value={formInput.name || ''}
+              placeholder="Enter Contact Name"
+              value={formInput.name}
               onChange={handleChange}
             />
           </div>
           <div className="col-8 form-group pt-2 mx-auto">
             <input
-              type="text"
+              type="number"
               name="number"
               className="form-control"
               id="number"
               placeholder="Eenter Emergency Contact"
-              value={formInput.number || ''}
+              value={formInput.number}
               onChange={handleChange}
             />
             <button className="btn btn-info" type="submit">
-              {contactObj.firebaseKey ? 'Update' : 'Submit'}
+              {obj.firebaseKey ? 'Update' : 'Submit'}
             </button>
           </div>
         </div>
@@ -89,6 +83,15 @@ export default function ContactForm({ contactObj = {} }) {
   );
 }
 ContactForm.propTypes = {
-  contactObj: PropTypes.shape({}),
+  obj: PropTypes.shape({
+    name: PropTypes.string,
+    firebaseKey: PropTypes.string,
+    uid: PropTypes.string,
+    number: PropTypes.number,
+    favorite: PropTypes.bool,
+  }),
+  userId: PropTypes.string.isRequired,
 };
-ContactForm.defaultProps = { contactObj: {} };
+ContactForm.defaultProps = {
+  obj: {},
+};
