@@ -13,7 +13,6 @@ export default function Routes({ user }) {
   return (
     <div>
       <Switch>
-        {/* Home */ }
         <Route exact path="/" component={PostCard} user={user} />
         <Route exact path="addPost" component={PostForm} user={user} />
         <Route
